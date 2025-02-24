@@ -35,14 +35,14 @@
 // }
 
 export async function GET(request) {
-  // Your external API call logic here
-  const res = await fetch('https://weatherapi-com.p.rapidapi.com/forecast.json?q=toronto%2Cca&days=3', {
-    method: 'GET',
-    headers: {
-      'X-RapidAPI-Key': 'bec3babc6dmsh6be1666edc7c34fp133bc8jsn2f49f7e68272',
-      'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com'
-    }
-  });
-  const data = await res.json();
-  return new Response(JSON.stringify(data), { status: 200 });
-}
+    // Your external API call logic here
+    const res = await fetch('https://weatherapi-com.p.rapidapi.com/forecast.json?q=toronto%2Cca&days=3', {
+      method: 'GET',
+      headers: {
+        'X-RapidAPI-Key': 'bec3babc6dmsh6be1666edc7c34fp133bc8jsn2f49f7e68272',
+        'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com'
+      }
+    });
+    const data = await res.json();
+    return new Response(JSON.stringify(data), { status: 200 });
+  }

@@ -53,7 +53,7 @@ export default function Home() {
   useEffect(() => {
     async function fetchWeather() {
       try{
-        const res = await fetch('/api/weather');
+        const res = await fetch('http://localhost:5000/api/weather');
         if (!res.ok) {
           throw new Error(`Error: ${res.status} ${res.statusText}`);
         }
@@ -69,6 +69,8 @@ export default function Home() {
   if (error) return <div>Error: {error}</div>;
   if (!weatherData) return <div>Loading...</div>;
 
+  const location = weatherData;
+  const forecastDay = weatherData.forecast.forecastday || [];
 // export default async function Home() {
 //   const baseUrl = "http://127.0.0.1:3000";
 //   let forecast = null;
@@ -120,15 +122,18 @@ export default function Home() {
           zIndex: 1, // Ensure this is above the image
         }}
       >
-        <h1 className="text-sm font-bold">My Location {location.name}</h1>
+        <h1 className="text-sm font-bold">My Location {location?.name}</h1>
         <h2>
-          {forecast ? (
-            <div>
-              <div>Date: {forecast.date}</div>
-              <div>Max Temp (C): {forecast.day.maxtemp_c}</div>
-              <div>Avg Temp (C): {forecast.day.avgtemp_c}</div>
-              <div>Min Temp (C): {forecast.day.mintemp_c}</div>
+          {forecastDay.length > 0 ? (
+            forecastDay.map((day, index) => 
+            (
+            <div key={index}>
+              <div>Date: {forecastDay.date}</div>
+              <div>Max Temp (C): {forecastDay.day.maxtemp_c}</div>
+              <div>Avg Temp (C): {forecastDay.day.avgtemp_c}</div>
+              <div>Min Temp (C): {forecastDay.day.mintemp_c}</div>
             </div>
+            ))
           ) : (
             <div>No forecast available</div>
           )}
