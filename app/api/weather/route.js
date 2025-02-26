@@ -36,7 +36,10 @@
 
 export async function GET(request) {
     // Your external API call logic here
-    const res = await fetch('https://weatherapi-com.p.rapidapi.com/forecast.json?q=toronto%2Cca&days=3', {
+    const { searchParams } = new URL(request.url);
+    const serachCity = searchParams.get('city') || 'toronto';
+
+    const res = await fetch(`https://weatherapi-com.p.rapidapi.com/forecast.json?q=${serachCity}&days=3`, {
       method: 'GET',
       headers: {
         'X-RapidAPI-Key': 'bec3babc6dmsh6be1666edc7c34fp133bc8jsn2f49f7e68272',
